@@ -38,7 +38,7 @@ class TimeClassMixin(object):
 
         # HTML5 input types and attributes
         for field in self.fields.values():
-            if isinstance(field, forms.TimeField):
+            if isinstance(field.widget, forms.TimeInput):
                 add_css_class(field.widget, 'time')
 
 
@@ -50,7 +50,7 @@ class DateClassMixin(object):
 
         # HTML5 input types and attributes
         for field in self.fields.values():
-            if isinstance(field, forms.DateField):
+            if isinstance(field.widget, forms.DateInput):
                 add_css_class(field.widget, 'date')
 
 
@@ -62,7 +62,7 @@ class DateTimeClassMixin(object):
 
         # HTML5 input types and attributes
         for field in self.fields.values():
-            if isinstance(field, forms.DateTimeField):
+            if isinstance(field.widget, forms.DateTimeInput):
                 add_css_class(field.widget, 'datetime')
 
 
