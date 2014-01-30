@@ -24,9 +24,17 @@ class RequiredMixin(object):
     def __init__(self, *args, **kwargs):
         super(RequiredMixin, self).__init__(*args, **kwargs)
 
-        # HTML5 required attributes
+        # Set HTML5 required attributes. Note that if we set the required
+        # attribute on fields with certain widgets, it will cause the form to
+        # break by requiring EVERY option to be selected. This is not possible
+        # with the RadioSelect widget, and in most cases won't be the desired
+        # behaviour with the CheckboxSelectMultiple widget. If it is, the
+        # required attribute of the widget can still be set manually in the
+        # form.
         for field in self.fields.values():
-            if field.required:
+            if field.required and not (
+                    isinstance(field.widget, forms.CheckboxSelectMultiple) or\
+                    isinstance(field.widget, forms.RadioSelect)):
                 field.widget.attrs.update({'required': 'required'})
 
 
