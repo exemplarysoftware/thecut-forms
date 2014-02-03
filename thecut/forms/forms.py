@@ -33,9 +33,21 @@ class RequiredMixin(object):
         # form.
         for field in self.fields.values():
             if field.required and not (
-                    isinstance(field.widget, forms.CheckboxSelectMultiple) or\
+                    isinstance(field.widget, forms.CheckboxSelectMultiple) or
                     isinstance(field.widget, forms.RadioSelect)):
                 field.widget.attrs.update({'required': 'required'})
+
+
+class MaxLengthMixin(object):
+    """Adds the HTML5 'maxlength' attribute to applicable Textarea widgets."""
+
+    def __init__(self, *args, **kwargs):
+        super(MaxLengthMixin, self).__init__(*args, **kwargs)
+
+        # HTML5 maxlength attribute for textarea
+        for field in self.fields.values():
+            if isinstance(field.widget, forms.Textarea) and field.max_length:
+                field.widget.attrs.update({'maxlength': field.max_length})
 
 
 class TimeClassMixin(object):
@@ -74,8 +86,8 @@ class DateTimeClassMixin(object):
                 add_css_class(field.widget, 'datetime')
 
 
-class FormMixin(DateTimeClassMixin, DateClassMixin, TimeClassMixin,
-                EmailTypeMixin, RequiredMixin):
+class FormMixin(DateTimeClassMixin, DateClassMixin, EmailTypeMixin,
+                MaxLengthMixin, RequiredMixin, TimeClassMixin):
     """Form mixin.
 
     Used to extend a standard Django :py:class:`~django.forms.Form` class with
