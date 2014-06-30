@@ -1,4 +1,4 @@
-{% for field in form %}
+{% for field in form.visible_fields %}
   <li class="{{ field.name|slugify }}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
     {{ field.label_tag }}
     {{ field.errors }}
