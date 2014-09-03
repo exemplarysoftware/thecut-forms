@@ -86,6 +86,26 @@ class DateTimeClassMixin(object):
                 add_css_class(field.widget, 'datetime')
 
 
+class DateTimeTimezoneMixin(object):
+    """Adds timezone help text to any datetime fields."""
+
+    def __init__(self, *args, **kwargs):
+        super(DateTimeTimezoneMixin, self).__init__(*args, **kwargs)
+        self._set_timezone_help_texts(data=self.initial)
+
+    def _set_timezone_help_texts(self, data):
+        for field_name, field in self.fields.items():
+            field_data = data.get(field_name)
+            if field_data and isinstance(field.widget, forms.DateTimeInput):
+                field.help_text = field_data.tzname()
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super(DateTimeTimezoneMixin, self).clean(*args,
+                                                                **kwargs)
+        self._set_timezone_help_texts(data=cleaned_data)
+        return cleaned_data
+
+
 class FormMixin(DateTimeClassMixin, DateClassMixin, EmailTypeMixin,
                 MaxLengthMixin, RequiredMixin, TimeClassMixin):
     """Form mixin.
