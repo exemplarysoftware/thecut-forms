@@ -1,8 +1,8 @@
 {% for field in form.visible_fields %}
   <li class="{{ field.name|slugify }}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
     {{ field.label_tag }}
-    {{ field.errors }}
-    {% if field.help_text %}<span class="helptext">{{ field.help_text }}</span>{% endif %}
     <div class="field">{{ field }}</div>
+    {% if field.help_text %}<span class="helptext">{{ field.help_text }}</span>{% endif %}
+    {{ field.errors }}
   </li>
 {% endfor %}
