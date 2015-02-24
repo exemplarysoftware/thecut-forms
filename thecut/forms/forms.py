@@ -50,6 +50,17 @@ class MaxLengthMixin(object):
                 field.widget.attrs.update({'maxlength': field.max_length})
 
 
+class PlaceholderMixin(object):
+
+    class Meta(object):
+        placeholders = {}
+
+    def __init__(self, *args, **kwargs):
+        super(PlaceholderMixin, self).__init__(*args, **kwargs)
+        for key, value in self.Meta.placeholders:
+            self.fields[key].widget.attrs.update({'placeholder': value})
+
+
 class TimeClassMixin(object):
     """Adds a 'time' css class to any time fields."""
 
@@ -107,7 +118,8 @@ class DateTimeTimezoneMixin(object):
 
 
 class FormMixin(DateTimeClassMixin, DateClassMixin, EmailTypeMixin,
-                MaxLengthMixin, RequiredMixin, TimeClassMixin):
+                MaxLengthMixin, PlaceholderMixin, RequiredMixin,
+                TimeClassMixin):
     """Form mixin.
 
     Used to extend a standard Django :py:class:`~django.forms.Form` class with
