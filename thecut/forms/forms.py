@@ -57,7 +57,7 @@ class PlaceholderMixin(object):
 
     def __init__(self, *args, **kwargs):
         super(PlaceholderMixin, self).__init__(*args, **kwargs)
-        for key, value in self.Meta.placeholders:
+        for key, value in dict(getattr(self.Meta, 'placeholders', {})).items():
             self.fields[key].widget.attrs.update({'placeholder': value})
 
 
