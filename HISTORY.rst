@@ -4,6 +4,20 @@
 History
 =======
 
+
+0.4 (2016-07-06)
+----------------
+
+* Added Sphinx documentation environment.
+* Added installation / usage / testing documentation.
+* Moved some plain-text documentation over to reStructuredText.
+* Added ``tox``-based testing environment.
+* Added unit tests for a majority of functionality.
+* Added continuous integration with Travis.
+* Added code coverage with codecov.
+* Improved ``setup.py``.
+
+
 0.3.11 (2016-02-28)
 -------------------
 
