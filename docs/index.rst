@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to thecut-forms's documentation!
-=============================================
+========================================
 
 Contents:
 
@@ -13,7 +13,7 @@ Contents:
 
    readme
    installation
-   usage
+   usage/index
    testing
    history
    authors
