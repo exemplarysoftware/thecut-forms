@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from django import forms
-from thecut.forms.forms import (DateClassMixin, EmailTypeMixin, MaxLengthMixin,
+from thecut.forms.forms import (DateClassMixin, DateTimeClassMixin,
+                                EmailTypeMixin, MaxLengthMixin,
                                 PlaceholderMixin, RequiredMixin,
                                 TimeClassMixin)
 
@@ -63,5 +64,12 @@ class TimeClassMixinForm(TimeClassMixin, forms.Form):
 class DateClassMixinForm(DateClassMixin, forms.Form):
 
     date = forms.DateField()
+
+    other = forms.CharField()
+
+
+class DateTimeClassMixinForm(DateTimeClassMixin, forms.Form):
+
+    datetime = forms.DateTimeField()
 
     other = forms.CharField()

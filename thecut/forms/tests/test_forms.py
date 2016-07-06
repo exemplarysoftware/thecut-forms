@@ -2,9 +2,10 @@
 from __future__ import absolute_import, unicode_literals
 from .. import forms
 from django.test import TestCase
-from test_app.forms import (DateClassMixinForm, EmailTypeMixinForm,
-                            MaxLengthMixinForm, PlaceholderMixinForm,
-                            RequiredMixinForm, TimeClassMixinForm)
+from test_app.forms import (DateClassMixinForm, DateTimeClassMixinForm,
+                            EmailTypeMixinForm, MaxLengthMixinForm,
+                            PlaceholderMixinForm, RequiredMixinForm,
+                            TimeClassMixinForm)
 
 
 class TestEmailTypeMixin(TestCase):
@@ -175,6 +176,29 @@ class TestDateClassMixin(TestCase):
         :py:class:`django.forms.DateInput` widget."""
         self.assertNotIn(
             'date', get_css_classes(self.form.fields['other']))
+
+
+class TestDateTimeClassMixin(TestCase):
+
+    """Tests for the :py:class:`thecut.forms.forms.DateTimeClassMixin`
+    class."""
+
+    def setUp(self):
+        self.form = DateTimeClassMixinForm()
+
+    def test_date_class_added_for_datefield(self):
+        """Test if the ``datetime`` CSS class is applied to a child
+        py:class:`django.forms.Field` using the
+        :py:class:`django.forms.DateTimeInput` widget."""
+        self.assertIn('datetime', get_css_classes(
+            self.form.fields['datetime']))
+
+    def test_date_class_not_added_for_nondatefield(self):
+        """Test if the ``datetime`` CSS class is not applied to a child
+        py:class:`django.forms.Field` not using the
+        :py:class:`django.forms.DateTimeInput` widget."""
+        self.assertNotIn(
+            'datetime', get_css_classes(self.form.fields['other']))
 
 
 class TestFormMixin(TestCase):
