@@ -5,7 +5,9 @@ from thecut.forms.utils import add_css_class
 
 
 class EmailTypeMixin(object):
-    """Adds the HTML5 'email' input type to any email fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that sets the HTML5
+    ``email`` input type on any child :py:class:`~django.forms.EmailField`
+    instances."""
 
     def __init__(self, *args, **kwargs):
         super(EmailTypeMixin, self).__init__(*args, **kwargs)
@@ -17,7 +19,16 @@ class EmailTypeMixin(object):
 
 
 class RequiredMixin(object):
-    """Adds the HTML5 'required' attribute to any required fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that sets the HTML5
+    ``required`` attribute on any child :py:class:`~django.forms.Field`
+    instances that is required.
+
+    This mixin does not apply the `required` attribute to fields using
+    :py:class:`~django.forms.RadioSelect` and
+    :py:class:`~django.forms.CheckboxSelectMultiple` as
+    the HTML5 ``required`` attribute does not behave as (usually) expected on
+    these widgets.
+    """
 
     required_css_class = 'required'
 
@@ -39,8 +50,12 @@ class RequiredMixin(object):
 
 
 class MaxLengthMixin(object):
-    """Adds the HTML5 'maxlength' attribute to applicable Textarea widgets."""
+    """A mixin for a :py:class:`~django.forms.Form` that sets the HTML5
+    ``maxlength`` attribute on any child :py:class:`~django.forms.Field`
+    instances using the :py:class:`~django.forms.Textarea` widget.
 
+    A ``max_length`` must be specified on the :py:class:`~django.forms.Field`.
+    """
     def __init__(self, *args, **kwargs):
         super(MaxLengthMixin, self).__init__(*args, **kwargs)
 
@@ -51,6 +66,23 @@ class MaxLengthMixin(object):
 
 
 class PlaceholderMixin(object):
+    """A mixin for a :py:class:`~django.forms.Form` that allows you to easily set
+    the HTML5 ``placeholder`` widget on a child
+    :py:class:`~django.forms.Field`.
+
+    To add a ``placeholder`` to a :py:class:`~django.forms.Field`, specify it
+    in a ``placeholders`` ``dict`` on the :py:class:`~django.forms.Form`'s
+    :py:class:`~django.forms.Form.Meta` class. For example::
+
+        class MyForm(forms.Form):
+
+            foo = forms.CharField()
+
+            class Meta(object):
+                placeholders = {
+                    'foo': 'Enter some text here.'
+                }
+    """
 
     class Meta(object):
         placeholders = {}
@@ -62,7 +94,9 @@ class PlaceholderMixin(object):
 
 
 class TimeClassMixin(object):
-    """Adds a 'time' css class to any time fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that adds a ``time`` CSS
+    class on any child :py:class:`~django.forms.Field` instances using the
+    :py:class:`~django.forms.TimeInput` widget.."""
 
     def __init__(self, *args, **kwargs):
         super(TimeClassMixin, self).__init__(*args, **kwargs)
@@ -74,7 +108,9 @@ class TimeClassMixin(object):
 
 
 class DateClassMixin(object):
-    """Adds a 'date' css class to any date fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that adds a ``date`` CSS
+    class on any child :py:class:`~django.forms.Field` instances using the
+    :py:class:`~django.forms.DateInput` widget.."""
 
     def __init__(self, *args, **kwargs):
         super(DateClassMixin, self).__init__(*args, **kwargs)
@@ -86,7 +122,9 @@ class DateClassMixin(object):
 
 
 class DateTimeClassMixin(object):
-    """Adds a 'datetime' css class to any datetime fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that adds a ``datetime`` CSS
+    class on any child :py:class:`~django.forms.Field` instances using the
+    :py:class:`~django.forms.DateTimeInput` widget.."""
 
     def __init__(self, *args, **kwargs):
         super(DateTimeClassMixin, self).__init__(*args, **kwargs)
@@ -98,7 +136,13 @@ class DateTimeClassMixin(object):
 
 
 class DateTimeTimezoneMixin(object):
-    """Adds timezone help text to any datetime fields."""
+    """A mixin for a :py:class:`~django.forms.Form` that adds ``help_text``
+    to any child :py:class:`~django.forms.Field` instances using the
+    :py:class:`~django.forms.DateTimeInput` widget.
+
+    This help text contains the timezone for the field's recorded data (if
+    any)).
+    """
 
     def __init__(self, *args, **kwargs):
         super(DateTimeTimezoneMixin, self).__init__(*args, **kwargs)
