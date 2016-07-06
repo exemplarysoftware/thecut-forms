@@ -22,7 +22,7 @@ Features
 * Automatically add appropriate HTML5 ``type``, ``required`` and ``maxlength`` attributes to form fields.
 * Automatically add ``date``, ``time``, and ``datetime`` CSS classes to appropriate form fields.
 * Easily add custom ``placeholders`` to form fields by editing a ``dict``.
-
+* Easily render forms in your templates in a well-designed standardised way that makes front-end development easier.
 
 Documentation
 -------------
@@ -33,12 +33,38 @@ The full documentation is at https://thecut-forms.readthedocs.org.
 Quickstart
 ----------
 
-Install thecut-forms::
+Make sure to install! (:ref:`installation`).
 
-    pip install thecut-forms
+Use one of the many available :py:class:`django.forms.Form` mixins on your :py:class:`django.forms.Form`::
+
+    from django import forms
+    from thecut.forms import EmailTypeMixin, TimeClassMixin
+
+    class MyForm(EmailTypeMixin, TimeClassMixin, forms.Form):
+
+        foo = forms.EmailField(required=True)
+
+        bar = forms.TimeField(required=True)
+
+Or use :py:class:`thecut.forms.forms.FormMixin` to get them all at once::
+
+    from django import forms
+    from thecut.forms import FormMixin
+
+    class MyForm(FormMixin, forms.Form):
+
+        foo = forms.CharField(required=True)
+
+See :ref:`mixins` for more information.
+
+In your template, use the ``forms/_form.html`` snippet to easily render your forms::
+
+    {% include "forms/_form.html" %}
+
+See :ref:`templates` for more information.
 
 
 Credits
 -------
 
-See ``AUTHORS.rst`` for credits.
+See :ref:`credits`.
