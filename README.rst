@@ -68,4 +68,4 @@ See :ref:`templates` for more information.
 Credits
 -------
 
-See :doc:`AUTHORS.rst <AUTHORS>`.
+See credits_.
