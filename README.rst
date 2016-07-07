@@ -24,6 +24,7 @@ Features
 * Easily add custom ``placeholders`` to form fields by editing a ``dict``.
 * Easily render forms in your templates in a well-designed standardised way that makes front-end development easier.
 
+
 Documentation
 -------------
 
@@ -33,7 +34,7 @@ The full documentation is at https://thecut-forms.readthedocs.org.
 Quickstart
 ----------
 
-Make sure to install! (:ref:`installation`).
+Install ``thecut-forms`` using the :ref:`installation`.
 
 Use one of the many available :py:class:`django.forms.Form` mixins on your :py:class:`django.forms.Form`::
 
