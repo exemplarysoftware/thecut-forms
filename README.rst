@@ -68,4 +68,4 @@ See :ref:`templates` for more information.
 Credits
 -------
 
-See credits_.
+See :ref:`credits`.
