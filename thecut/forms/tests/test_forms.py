@@ -186,14 +186,21 @@ class TestDateTimeClassMixin(TestCase):
     def setUp(self):
         self.form = DateTimeClassMixinForm()
 
-    def test_date_class_added_for_datefield(self):
+    def test_datetime_class_added_for_datefield(self):
         """Test if the ``datetime`` CSS class is applied to a child
         py:class:`django.forms.Field` using the
         :py:class:`django.forms.DateTimeInput` widget."""
         self.assertIn('datetime', get_css_classes(
             self.form.fields['datetime']))
 
-    def test_date_class_not_added_for_nondatefield(self):
+    def test_datetime_class_added_for_datefield_splitdatetimewidget(self):
+        """Test if the ``datetime`` CSS class is applied to a child
+        py:class:`django.forms.Field` using the
+        :py:class:`django.forms.DateTimeInput` widget."""
+        self.assertIn('datetime', get_css_classes(
+            self.form.fields['datetime_split']))
+
+    def test_datetime_class_not_added_for_nondatefield(self):
         """Test if the ``datetime`` CSS class is not applied to a child
         py:class:`django.forms.Field` not using the
         :py:class:`django.forms.DateTimeInput` widget."""

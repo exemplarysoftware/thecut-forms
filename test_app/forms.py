@@ -72,4 +72,6 @@ class DateTimeClassMixinForm(DateTimeClassMixin, forms.Form):
 
     datetime = forms.DateTimeField()
 
+    datetime_split = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
+
     other = forms.CharField()

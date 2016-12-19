@@ -131,7 +131,8 @@ class DateTimeClassMixin(object):
 
         # HTML5 input types and attributes
         for field in self.fields.values():
-            if isinstance(field.widget, forms.DateTimeInput):
+            if isinstance(field.widget, (forms.DateTimeInput,
+                                         forms.SplitDateTimeWidget)):
                 add_css_class(field.widget, 'datetime')
 
 
