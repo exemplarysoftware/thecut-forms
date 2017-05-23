@@ -6,6 +6,11 @@ from test_app.forms import (DateClassMixinForm, DateTimeClassMixinForm,
                             EmailTypeMixinForm, MaxLengthMixinForm,
                             PlaceholderMixinForm, RequiredMixinForm,
                             TimeClassMixinForm)
+from thecut.forms.forms import DateTimeTimezoneMixin
+from mock import patch, MagicMock
+from datetime import datetime, tzinfo, timedelta
+from django import forms as django_forms
+import pytz
 
 
 class TestEmailTypeMixin(TestCase):
@@ -206,6 +211,43 @@ class TestDateTimeClassMixin(TestCase):
         :py:class:`django.forms.DateTimeInput` widget."""
         self.assertNotIn(
             'datetime', get_css_classes(self.form.fields['other']))
+
+
+class TestDateTimeTimezoneMixin(TestCase):
+
+    class UTC(tzinfo):
+        """UTC"""
+
+        def utcoffset(self, dt):
+            return timedelta(0)
+
+        def tzname(self, dt):
+            return 'UTC'
+
+        def dst(self, dt):
+            return timedelta(0)
+
+    @patch.object(DateTimeTimezoneMixin, 'initial', create=True)
+    @patch.object(DateTimeTimezoneMixin, 'fields', create=True)
+    def setUp(self, mock_fields, mock_initial):
+        self.mock_target_field = MagicMock()
+        self.mock_target_field.widget = \
+            django_forms.DateTimeInput()
+        mock_other_field = MagicMock()
+        mock_other_field.widget.return_value = \
+            django_forms.SplitDateTimeWidget()
+        mock_fields.return_value = {'target_field': self.mock_target_field,
+                                    'other_field': mock_other_field}
+        self.form = DateTimeTimezoneMixin()
+        self.form.fields = {'target_field': self.mock_target_field,
+                            'other_field': mock_other_field}
+
+    def test_setup_timezone_help_texts(self):
+        self.form._set_timezone_help_texts({'target_field':
+                                           datetime(1990, 1, 1, 0, 0, 0, 0,
+                                                    pytz.utc), 'other_field':
+                                           datetime(1991, 1, 1, 0, 0, 0)})
+        self.assertEqual(self.mock_target_field.help_text, "UTC")
 
 
 class TestFormMixin(TestCase):
