@@ -8,7 +8,7 @@ except ImportError:
 
 __title__ = 'thecut-forms'
 
-__version__ = '0.5'
+__version__ = '0.5.1'
 
 __url__ = 'https://github.com/thecut/thecut-forms'
 
