@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'thecut-forms'
-copyright = u'2016, The Cut Creative'
+copyright = u'2017, The Cut Creative'
 author = u'The Cut Creative'
 
 # The version info for the project you're documenting, acts as replacement for
