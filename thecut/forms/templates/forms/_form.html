@@ -7,6 +7,12 @@
   {{ form.non_field_errors }}
   <ul>
     {% include "forms/_form_fields.html" with form=form %}
-    <li class="actions"><input type="submit" value="{{ form_submit_value|default:"Submit" }}" /></li>
+    <li class="actions">
+      {% if input_submit %}
+        <input type="submit" value="{{ form_submit_value|default:"Submit" }}" />
+      {% else %}
+        <button type="submit">{{ form_submit_value|default:"Submit" }}</button>
+      {% endif %}
+    </li>
   </ul>
 </form>
