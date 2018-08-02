@@ -8,13 +8,13 @@ except ImportError:
 
 __title__ = 'thecut-forms'
 
-__version__ = '0.5.1'
+__version__ = '0.6'
 
 __url__ = 'https://github.com/thecut/thecut-forms'
 
 __author__ = 'The Cut Creative <development@thecut.net.au>'
 
-__copyright__ = 'Copyright 2013-2017 Busara Perth Pty Ltd'
+__copyright__ = 'Copyright 2013-2018 Busara Perth Pty Ltd'
 
 __license__ = 'Apache 2.0'
 
