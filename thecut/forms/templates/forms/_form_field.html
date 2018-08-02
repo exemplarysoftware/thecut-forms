@@ -1,0 +1,6 @@
+<li class="{{ field.name|slugify }}{% if field.css_classes %} {{ field.css_classes }}{% endif %}{% if field.field.widget.input_type %} type-{{ field.field.widget.input_type }}{% endif %}">
+  {{ field.label_tag }}
+  <div class="field">{{ field }}</div>
+  {% if field.help_text %}<span class="helptext">{% if safe_help_text %}{{ field.help_text|safe }}{% else %}{{ field.help_text }}{% endif %}</span>{% endif %}
+  {{ field.errors }}
+</li>
